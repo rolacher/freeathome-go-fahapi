@@ -1,4 +1,4 @@
-module github.com/guckykv/freeathome-go-fahapi/fahapi
+module github.com/rolacher/freeathome-go-fahapi/fahapi
 
 go 1.15
 

@@ -219,7 +219,7 @@ func ConfigureApi(
 	logLevel = logLevelParam
 }
 
-func ReadAndHydradteAllDevices() {
+func ReadAndHydrateAllDevices() {
 	configResult, err := GetConfiguration()
 	if err != nil {
 		logger.Fatalf("can't initialize f@h api: %s", err)
@@ -269,6 +269,9 @@ func GetDatapoint(sysap string, deviceId string, channelId string, datapointId s
 	return point, err
 }
 
+// GetConfiguration reads the SysAP configuration and returns it as data structure.
+// The configuration consists of the SysAP name, serial number, etc., a list of
+// devices and a list of users.
 func GetConfiguration() (*SysAP, error) {
 	httpUrl := fmt.Sprintf("http://%s%s%s", apiConfig.Host, ApiPathPrefix, "/api/rest/configuration")
 	json, err := loadUrl(httpUrl)

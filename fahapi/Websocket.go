@@ -15,6 +15,10 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+// StartWebSocketLoop öffnet einen Websocket, startet eine go-Routine zum lesen
+// von Events und aktualisiert in einer Schleife alle Devices.
+// Es wird ein Websocket ohne TLS geöffnet mit Basic Auth.
+// Die 
 func StartWebSocketLoop(refreshTime int) error {
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt, syscall.SIGHUP)
@@ -129,7 +133,9 @@ func StartWebSocketLoop(refreshTime int) error {
 }
 
 func processWebsocketMessage(message WebsocketMessage) {
+	logger.Println("[processWebsocketMessage]") // roac
 	if wsUpdateMessageCallback != nil {
+		logger.Println("[wsUpdateMessageCallback]") // roac
 		wsUpdateMessageCallback(message) // tell someone about the new message
 	}
 
